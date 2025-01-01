@@ -201,45 +201,6 @@ router.delete("/folders/:id", async (req, res) => {
   }
 });
 
-// router.post("/workspaces/share", VerifyUser, async (req, res) => {
-//   const { sharedEmail, workspaceId, accesslevel } = req.body;
-//   try {
-//     if (sharedEmail === req.isUser.email) {
-//       return res
-//         .status(500)
-//         .json({ message: "Can't share workspace for own email", code: "0" });
-//     }
-//     const sharedUser = await User.findOne({ email: sharedEmail });
-//     if (!sharedUser) {
-//       return res
-//         .status(404)
-//         .json({ message: "User to share with not found", code: "0" });
-//     }
-//     if (
-//       sharedUser.sharedWorkspaces.some(
-//         (item) => item.workspace.toString() == workspaceId
-//       )
-//     ) {
-//       return res.status(409).json({
-//         message: "Workspace already shared with this user",
-//         code: "1",
-//       });
-//     }
-//     sharedUser.sharedWorkspaces.push({
-//       workspace: workspaceId,
-//       accesslevel,
-//       ownername: req.isUser.name,
-//     });
-//     await sharedUser.save();
-//     res
-//       .status(200)
-//       .json({ message: "Workspace shared successfully", code: "1" });
-//   } catch (error) {
-//     console.error("Error sharing workspace:", error);
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// });
-
 router.post("/workspaces/share", VerifyUser, async (req, res) => {
   const { sharedEmail, workspaceId, accesslevel } = req.body;
   console.log(req.body);
