@@ -76,7 +76,7 @@ function Login() {
           </label>
           <div className={styles.passworddiv}>
             <input
-              type="text"
+              type="password"
               value={password}
               onChange={(e) => setpassword(e.target.value)}
               placeholder="Enter Password"

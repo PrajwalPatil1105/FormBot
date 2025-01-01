@@ -102,7 +102,6 @@
 
 .popupbtns button:hover {
   background-color: transparent;
-  /* color: blue; */
   padding: 0.41em;
   border: 2px solid blue;
 }
