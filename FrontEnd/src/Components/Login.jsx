@@ -34,7 +34,8 @@ function Login() {
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
-      const data = await responce.json();
+      const data = JSON.parse(responce);
+      console.log(data);
       setSerMsg(data);
     }
   }
