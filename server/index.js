@@ -14,6 +14,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://formbot-backend-3xmt.onrender.com",
+      "https://form-bot-kappa.vercel.app/",
     ],
     credentials: true,
   })
