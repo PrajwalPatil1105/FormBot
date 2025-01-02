@@ -87,8 +87,6 @@ router.post("/login", async (req, res) => {
   res.status(200).json({
     message: "Login Successful",
     statuscode: "1",
-    id: isUser.id,
-    workspaceid: isUser.workspace,
   });
 });
 

@@ -30,11 +30,11 @@ function Login() {
     if (email.length > 2 && password.length >= 1) {
       const responce = await fetch(`${BASE_URL}/Formbot/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-type": "application/JSON" },
         body: JSON.stringify({ email, password }),
         credentials: "include",
       });
-      const data = JSON.parse(responce);
+      const data = await responce.json();
       console.log(data);
       setSerMsg(data);
     }
