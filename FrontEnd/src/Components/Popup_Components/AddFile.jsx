@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "../Popup_Components/AddFile.module.css";
+import styles from "../Popup_Components/Addfile.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
 function AddFile({
