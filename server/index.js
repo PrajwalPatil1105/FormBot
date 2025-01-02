@@ -9,16 +9,13 @@ app.use(cookiesparser());
 app.use(express.json());
 dotenv.config();
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://formbot-backend-3xmt.onrender.com",
-      "https://form-bot-kappa.vercel.app/",
-    ],
-    credentials: true,
-  })
-);
+app.use(cors());
+// app.use(
+//   cors({
+//     origin: ["http://localhost:5173", "https://form-bot-kappa.vercel.app/"],
+//     credentials: true,
+//   })
+// );
 
 app.set("trust proxy", 1);
 
