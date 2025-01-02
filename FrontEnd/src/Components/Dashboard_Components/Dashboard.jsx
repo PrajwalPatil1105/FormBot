@@ -36,6 +36,7 @@ function Dashboard() {
   const [Forms, setForms] = useState("");
   const [loading, setLoading] = useState(true);
   const [selFolderid, setselFolderid] = useState("0");
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const location = useLocation();
 
   function toggleBackground() {
@@ -45,7 +46,7 @@ function Dashboard() {
 
   async function logout() {
     if (confirm("Want to Logout??")) {
-      const responce = await fetch("http://localhost:4000/Formbot/logout", {
+      const responce = await fetch(`${BASE_URL}/Formbot/logout`, {
         method: "POST",
         headers: { "Content-type": "application/JSON" },
         credentials: "include",
@@ -66,9 +67,7 @@ function Dashboard() {
   async function folderdetails(id) {
     setselFolderid(id);
     try {
-      const response = await fetch(
-        `http://localhost:4000/Formbot/folders/${id}`
-      );
+      const response = await fetch(`${BASE_URL}/Formbot/folders/${id}`);
       if (!response.ok) {
         throw new Error("Failed to fetch folder data");
       }
@@ -84,7 +83,7 @@ function Dashboard() {
       setLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:4000/Formbot/workspaces/${selectedWorkspace}`
+          `${BASE_URL}/Formbot/workspaces/${selectedWorkspace}`
         );
         if (!response.ok) {
           throw new Error(`Failed to fetch workspace: ${response.statusText}`);
@@ -107,16 +106,13 @@ function Dashboard() {
   useEffect(() => {
     const fetchallWorkspace = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:4000/Formbot/allworkspaces",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`${BASE_URL}/Formbot/allworkspaces`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
         const data = await response.json();
         setWorkspace(data.ownedWorkspace);
         setSharedWorkspaces(data.sharedWorkspaces);

@@ -5,6 +5,7 @@ import styles from "../Forms_Components/Details.module.css";
 function Details({ Mode, formid }) {
   const [responses, setResponses] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const [stats, setStats] = useState({
     views: 0,
     starts: 0,
@@ -44,9 +45,7 @@ function Details({ Mode, formid }) {
   useEffect(() => {
     const fetchResponses = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:4000/Formbot/responses/${formid}`
-        );
+        const response = await fetch(`${BASE_URL}/Formbot/responses/${formid}`);
         const data = await response.json();
 
         if (data.responses) {

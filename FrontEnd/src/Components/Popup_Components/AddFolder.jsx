@@ -6,6 +6,7 @@ function AddFolder({ Mode, setfolderpopup, selectedWorkspace, setfolmsg }) {
   const [foldername, setfoldername] = useState("");
   const [nameerr, setnameerr] = useState("");
   const [serMsg, setserMsg] = useState("");
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
   async function pushhfolder() {
     foldername.length < 1
@@ -13,7 +14,7 @@ function AddFolder({ Mode, setfolderpopup, selectedWorkspace, setfolmsg }) {
       : setnameerr(" ");
     if (foldername.length >= 1) {
       try {
-        const response = await fetch("http://localhost:4000/Formbot/folders", {
+        const response = await fetch(`${BASE_URL}/Formbot/folders`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

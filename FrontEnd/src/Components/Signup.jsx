@@ -12,11 +12,11 @@ function Signup() {
   const [password, setpassword] = useState("");
   const [compassword, setcompassword] = useState("");
   const [SerMsg, setSerMsg] = useState();
-
   const [usernameErr, setusernameErr] = useState("");
   const [emailErr, setemailErr] = useState("");
   const [passwordErr, setpasswordErr] = useState("");
   const [compasswordErr, setcompasswordErr] = useState("");
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
   async function handlesubmit(e) {
     e.preventDefault();
@@ -47,7 +47,7 @@ function Signup() {
       password.length >= 0 &&
       password === compassword
     ) {
-      const responce = await fetch("http://localhost:4000/Formbot/signup", {
+      const responce = await fetch(`${BASE_URL}/Formbot/signup`, {
         method: "POST",
         headers: { "Content-type": "application/JSON" },
         body: JSON.stringify({ name, email, password }),

@@ -3,6 +3,7 @@ import styles from "../Forms_Components/Userdetailspopup.module.css";
 import toast, { Toaster } from "react-hot-toast";
 
 function Userdetailspopup({ setUser, setShowPopup, formid }) {
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value.trim();
@@ -14,7 +15,7 @@ function Userdetailspopup({ setUser, setShowPopup, formid }) {
     setUser({ name, email });
     try {
       const response = await fetch(
-        `http://localhost:4000/Formbot/increment-start/${formid}`,
+        `${BASE_URL}/Formbot/increment-start/${formid}`,
         {
           method: "PUT",
           headers: {

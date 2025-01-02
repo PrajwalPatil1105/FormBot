@@ -32,6 +32,7 @@ function Createform() {
   const [Ratingcount, setRatingcount] = useState(1);
   const navigate = useNavigate();
   const location = useLocation();
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const formid = location.state?.id;
   const formname = location.state?.formname;
 
@@ -64,15 +65,12 @@ function Createform() {
 
   async function fetchingfields() {
     try {
-      const response = await fetch(
-        `http://localhost:4000/Formbot/getfields/${formid}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`${BASE_URL}/Formbot/getfields/${formid}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       const data = await response.json();
       if (data?.code === "1") {
         console.log(data?.fields?.fields);
@@ -102,7 +100,7 @@ function Createform() {
     } else {
       try {
         const response = await fetch(
-          `http://localhost:4000/Formbot/updatefields/${formid}`,
+          `${BASE_URL}/Formbot/updatefields/${formid}`,
           {
             method: "PUT",
             headers: {

@@ -10,10 +10,11 @@ function DeleteFil({
   setdelSermsg,
   folderdetails,
 }) {
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   async function deletefile() {
     try {
       const response = await fetch(
-        `http://localhost:4000/Formbot/deletefile/${delFileid}`,
+        `${BASE_URL}/Formbot/deletefile/${delFileid}`,
         {
           method: "DELETE",
           headers: {

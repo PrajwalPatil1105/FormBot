@@ -9,12 +9,7 @@ function Share({ Mode, setsharepopup, selectedWorkspace }) {
   const [accesslevel, setaccesslevel] = useState("edit");
   const [err, seterr] = useState("");
   const [serMsg, setserMsg] = useState("");
-  // const workspaceId = localStorage.getItem("Workspaceid");
-
-  // useEffect(() => {
-  //   console.log(workspaceId);
-  //   console.log(selectedWorkspace);
-  // }, []);
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
   async function sendlink() {
     if (sharedEmail.length <= 2) {
@@ -25,21 +20,18 @@ function Share({ Mode, setsharepopup, selectedWorkspace }) {
       seterr("");
 
       try {
-        const response = await fetch(
-          "http://localhost:4000/Formbot/workspaces/share",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              sharedEmail,
-              workspaceId: selectedWorkspace,
-              accesslevel,
-            }),
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`${BASE_URL}/Formbot/workspaces/share`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sharedEmail,
+            workspaceId: selectedWorkspace,
+            accesslevel,
+          }),
+          credentials: "include",
+        });
         const data = await response.json();
         setserMsg(data);
       } catch (error) {

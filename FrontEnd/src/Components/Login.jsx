@@ -12,6 +12,7 @@ function Login() {
   const [emailErr, setemailErr] = useState("");
   const [passwordErr, setpasswordErr] = useState("");
   const [SerMsg, setSerMsg] = useState();
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
   async function handlesubmit(e) {
     e.preventDefault();
@@ -27,7 +28,7 @@ function Login() {
       : setpasswordErr("");
 
     if (email.length > 2 && password.length >= 1) {
-      const responce = await fetch("http://localhost:4000/Formbot/login", {
+      const responce = await fetch(`${BASE_URL}/Formbot/login`, {
         method: "POST",
         headers: { "Content-type": "application/JSON" },
         body: JSON.stringify({ email, password }),

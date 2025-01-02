@@ -4,9 +4,10 @@ import toast, { Toaster } from "react-hot-toast";
 
 function DeleteFol({ Mode, setdelFolderpopup, delFolderid, setdelSermsg }) {
   async function deletefolder() {
+    const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
     try {
       const response = await fetch(
-        `http://localhost:4000/Formbot/folders/${delFolderid}`,
+        `${BASE_URL}/Formbot/folders/${delFolderid}`,
         {
           method: "DELETE",
           headers: {
@@ -15,7 +16,6 @@ function DeleteFol({ Mode, setdelFolderpopup, delFolderid, setdelSermsg }) {
         }
       );
       const data = await response.json();
-      console.log(data);
 
       if (data?.code === "1") {
         toast.success(data?.Fname + " " + "Folder deleted successfully");

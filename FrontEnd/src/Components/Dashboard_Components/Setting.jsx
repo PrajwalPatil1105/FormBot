@@ -20,11 +20,12 @@ function Setting() {
   const [Updatedpassword, setUpdatedpassword] = useState("");
   const [oldpassword, setoldpassword] = useState("");
   const [err, seterr] = useState("");
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const navigate = useNavigate();
 
   async function logout() {
     if (confirm("Want to Logout??")) {
-      const responce = await fetch("http://localhost:4000/Formbot/logout", {
+      const responce = await fetch(`${BASE_URL}/Formbot/logout`, {
         method: "POST",
         headers: { "Content-type": "application/JSON" },
         credentials: "include",

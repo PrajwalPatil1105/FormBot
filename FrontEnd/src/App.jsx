@@ -21,7 +21,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/createform" element={<Createform />} />
-        <Route path="/response/:formid*" element={<Responce />} />
+        <Route path="/response/:formid/*" element={<Responce />} />
         <Route path="/Details" element={<Details />} />
         <Route path="/thankyou" element={<Thankyou />} />
       </Routes>

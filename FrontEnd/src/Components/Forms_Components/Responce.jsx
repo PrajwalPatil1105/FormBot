@@ -15,18 +15,16 @@ function Response() {
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   const { formid } = useParams();
   const navigate = useNavigate();
 
   const fetchFormData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `http://localhost:4000/Formbot/formdata/${formid}`,
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch(`${BASE_URL}/Formbot/formdata/${formid}`, {
+        method: "GET",
+      });
       const data = await response.json();
       setInputFields(data);
       if (response.ok) {
@@ -51,7 +49,7 @@ function Response() {
     const incrementViewCount = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/Formbot/increment-view/${formid}`,
+          `${BASE_URL}/Formbot/increment-view/${formid}`,
           {
             method: "PUT",
             headers: {
@@ -96,7 +94,7 @@ function Response() {
       setUpdatedInputFields(inputFields);
       try {
         const response = await fetch(
-          `http://localhost:4000/Formbot/submitresponse/${formid}`,
+          `${BASE_URL}/Formbot/submitresponse/${formid}`,
           {
             method: "POST",
             headers: {

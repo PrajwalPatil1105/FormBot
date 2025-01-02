@@ -11,10 +11,11 @@ function AddFile({
   setdelSermsg,
 }) {
   const [formname, setformname] = useState("");
+  const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
   let fields = [];
   async function pushfile() {
     try {
-      const response = await fetch("http://localhost:4000/Formbot/addforms", {
+      const response = await fetch(`${BASE_URL}/Formbot/addforms`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
