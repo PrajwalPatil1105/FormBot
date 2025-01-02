@@ -8,7 +8,7 @@ const Form = require("../model/Formschema");
 const Response = require("../model/Responseschema");
 const Workspace = require("../model/Workspace");
 const jwt = require("jsonwebtoken");
-const bycrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 dotenv.config();
 
 const VerifyUser = async (req, res, next) => {
