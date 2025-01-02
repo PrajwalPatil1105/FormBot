@@ -9,7 +9,18 @@ app.use(cookiesparser());
 app.use(express.json());
 dotenv.config();
 
-app.use(cors({ origin: ["http://localhost:5173"], credentials: true }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://formbot-backend-3xmt.onrender.com",
+    ],
+    credentials: true,
+  })
+);
+
+app.set("trust proxy", 1);
+
 mongoose
   .connect(process.env.MONGODB_LINK)
   .then(() => {

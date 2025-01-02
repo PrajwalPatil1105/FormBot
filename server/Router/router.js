@@ -33,7 +33,7 @@ router.post("/signup", async (req, res) => {
   if (isUser) {
     return res.status(409).json({ message: "User Already Exists", code: "0" });
   }
-  const hashpassword = await bycrypt.hash(password, 10);
+  const hashpassword = await bcrypt.hash(password, 10);
   const newUser = await User.create({
     name,
     email,
@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
       .status(404)
       .json({ message: "Wrong Username or Password", statuscode: "0" });
   }
-  const isPassword = await bycrypt.compare(password, isUser.password);
+  const isPassword = await bcrypt.compare(password, isUser.password);
   if (!isPassword) {
     return res
       .status(401)
@@ -78,7 +78,12 @@ router.post("/login", async (req, res) => {
     },
     process.env.JWT_KEY
   );
-  res.cookie("usertoken", token, { httpOnly: true });
+  res.cookie("usertoken", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
+
   res.status(200).json({
     message: "Login Successful",
     statuscode: "1",
@@ -374,13 +379,13 @@ router.put("/update", VerifyUser, async (req, res) => {
     }
 
     if (oldpassword && Updatedpassword) {
-      const isMatch = await bycrypt.compare(oldpassword, user.password);
+      const isMatch = await bcrypt.compare(oldpassword, user.password);
       if (!isMatch) {
         return res
           .status(400)
           .json({ message: "Old password is incorrect", code: "0" });
       }
-      user.password = await bycrypt.hash(Updatedpassword, 10);
+      user.password = await bcrypt.hash(Updatedpassword, 10);
       updateType = 2;
     }
     await user.save();
