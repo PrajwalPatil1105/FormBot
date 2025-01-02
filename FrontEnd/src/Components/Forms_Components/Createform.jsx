@@ -36,7 +36,7 @@ function Createform() {
   const formid = location.state?.id;
   const formname = location.state?.formname;
 
-  let link = `http://localhost:5173/response/${formid}`;
+  let link = `https://form-bot-kappa.vercel.app/response/${formid}`;
 
   function share() {
     if (fields.length === 0) {
