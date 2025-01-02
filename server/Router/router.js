@@ -56,6 +56,7 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   const { email, password } = req.body;
   const isUser = await User.findOne({ email });
   if (!isUser) {
