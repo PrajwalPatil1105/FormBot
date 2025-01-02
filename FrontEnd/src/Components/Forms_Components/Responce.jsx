@@ -4,7 +4,7 @@ import { faPaperPlane, faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { useParams } from "react-router";
 import styles from "../Forms_Components/Responce.module.css";
 import toast, { Toaster } from "react-hot-toast";
-import UserdetailsPopup from "./UserdetailsPopup";
+import Userdetailspopup from "./Userdetailspopup";
 import { useLocation, useNavigate } from "react-router-dom";
 
 function Response() {
@@ -180,7 +180,7 @@ function Response() {
 
   if (showPopup) {
     return (
-      <UserdetailsPopup
+      <Userdetailspopup
         setUser={setUser}
         setShowPopup={setShowPopup}
         formid={formid}
