@@ -58,12 +58,16 @@ function JoinWorkspace() {
 
   return (
     <div className={styles.container}>
+      <span className={styles.heading}>
+        <img src="/Images/Logo.png" alt="icon" />
+        <h1>FormBot</h1>
+      </span>
       <div className={styles.spinner}></div>
       <p className={styles.text}>Processing your request...</p>
       <Toaster
         toastOptions={{
           style: {
-            color: "#aaa",
+            color: "#555",
             backgroundColor: "transparent",
             border: "2px solid #aaa",
             fontFamily: "Poppins",
