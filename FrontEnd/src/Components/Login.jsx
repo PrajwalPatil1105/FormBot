@@ -14,6 +14,18 @@ function Login() {
   const [SerMsg, setSerMsg] = useState();
   const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
 
+  const handleLoginSuccess = () => {
+    const redirectPath = localStorage.getItem("postLoginRedirect");
+    if (redirectPath) {
+      localStorage.removeItem("postLoginRedirect");
+      navigate(redirectPath);
+    } else {
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
+    }
+  };
+
   async function handlesubmit(e) {
     e.preventDefault();
     if (email.length === 0) {
@@ -42,9 +54,7 @@ function Login() {
   useEffect(() => {
     if (SerMsg?.statuscode === "1") {
       toast.success(SerMsg?.message);
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
+      handleLoginSuccess();
     } else if (SerMsg?.statuscode === "0") {
       toast.error(SerMsg?.message);
     }

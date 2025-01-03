@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./JoinWorkspace.module.css";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 function JoinWorkspace() {
   const { workspaceId, accesslevel } = useParams();
   const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
-  const currentPath = window.location.href;
+  const currentPath = window.location.pathname;
 
   useEffect(() => {
     const checkAuthAndJoin = async () => {
@@ -28,7 +28,26 @@ function JoinWorkspace() {
           navigate("/login");
           return;
         } else {
-          navigate("/dashboard");
+          const joinResponse = await fetch(
+            `${BASE_URL}/Formbot/workspaces/join/${workspaceId}/${accesslevel}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              credentials: "include",
+            }
+          );
+          const joinData = await joinResponse.json();
+          if (joinData?.code === "1") {
+            toast.success(joinData?.message);
+            setTimeout(() => {
+              navigate("/dashboard");
+            }, 4000);
+          } else {
+            toast.error(joinData?.message);
+            navigate("/dashboard");
+          }
         }
       } catch (error) {
         console.log("Error joining workspace:");
@@ -40,11 +59,21 @@ function JoinWorkspace() {
 
   return (
     <div className={styles.container}>
-      {/* Animated Loading Spinner */}
       <div className={styles.spinner}></div>
-
-      {/* Loading Text */}
       <p className={styles.text}>Processing your request...</p>
+      <Toaster
+        toastOptions={{
+          style: {
+            color: "#aaa",
+            backgroundColor: "transparent",
+            border: "2px solid #aaa",
+            fontFamily: "Poppins",
+            fontSize: "0.9em",
+            fontWeight: "400",
+            marginLeft: "3.5em",
+          },
+        }}
+      />
     </div>
   );
 }

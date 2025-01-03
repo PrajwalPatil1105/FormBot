@@ -543,4 +543,65 @@ router.get("/check-auth", VerifyUser, (req, res) => {
   }
 });
 
+router.post(
+  "/workspaces/join/:workspaceId/:accesslevel",
+  VerifyUser,
+  async (req, res) => {
+    const { workspaceId, accesslevel } = req.params;
+
+    try {
+      if (String(workspaceId) === String(req.isUser.workspaceid)) {
+        return res.status(400).json({
+          message: "Cannot join your own workspace",
+          code: "0",
+        });
+      }
+      const userToShare = await User.findById(req.isUser.id);
+
+      const existingSharedWorkspaceIndex =
+        userToShare.sharedWorkspaces.findIndex(
+          (item) => String(item.workspace) === String(workspaceId)
+        );
+
+      if (existingSharedWorkspaceIndex !== -1) {
+        const existingSharedWorkspace =
+          userToShare.sharedWorkspaces[existingSharedWorkspaceIndex];
+
+        if (existingSharedWorkspace.accesslevel === accesslevel) {
+          return res.status(409).json({
+            message: `You already have "${accesslevel}" access to this workspace`,
+            code: "1",
+          });
+        }
+
+        userToShare.sharedWorkspaces[existingSharedWorkspaceIndex].accesslevel =
+          accesslevel;
+        await userToShare.save();
+
+        return res.status(200).json({
+          message: `Workspace access level updated to "${accesslevel}"`,
+          code: "1",
+        });
+      }
+
+      userToShare.sharedWorkspaces.push({
+        workspace: workspaceId,
+        accesslevel,
+      });
+      await userToShare.save();
+
+      return res.status(201).json({
+        message: "Successfully joined workspace",
+        code: "1",
+      });
+    } catch (error) {
+      console.error("Error joining workspace:", error);
+      return res.status(500).json({
+        message: "An error occurred while joining the workspace",
+        code: "4",
+      });
+    }
+  }
+);
+
 module.exports = router;
