@@ -7,7 +7,7 @@ function JoinWorkspace() {
   const { workspaceId, accesslevel } = useParams();
   const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
-  const currentPath = window.location.pathname;
+  const currentPath = window.location.href;
 
   useEffect(() => {
     const checkAuthAndJoin = async () => {
@@ -28,7 +28,25 @@ function JoinWorkspace() {
           navigate("/login");
           return;
         } else {
-          navigate("/dashboard");
+          const joinResponse = await fetch(
+            `${BASE_URL}/Formbot/workspaces/join/${workspaceId}/${accesslevel}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              credentials: "include",
+            }
+          );
+          const joinData = await joinResponse.json();
+
+          if (joinResponse.ok) {
+            toast.success(joinData.message);
+            navigate("/dashboard");
+          } else {
+            toast.error(joinData.message);
+            navigate("/dashboard");
+          }
         }
       } catch (error) {
         console.log("Error joining workspace:");
