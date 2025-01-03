@@ -49,7 +49,7 @@ function Setting() {
       seterr("*Enter New Password");
     } else {
       seterr("");
-      const response = await fetch("http://localhost:4000/Formbot/Update", {
+      const response = await fetch(`${BASE_URL}/Formbot/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
