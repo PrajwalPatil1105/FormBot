@@ -63,7 +63,6 @@ function Setting() {
         credentials: "include",
       });
       const data = await response.json();
-      console.log(data);
       if (data?.code === "1" && data?.updateType === "1") {
         toast.success(data?.message);
       } else if (data?.code === "1" && data?.updateType === "2") {
