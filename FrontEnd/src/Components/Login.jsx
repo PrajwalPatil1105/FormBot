@@ -22,7 +22,7 @@ function Login() {
     } else {
       setTimeout(() => {
         navigate("/dashboard");
-      }, 2000);
+      }, 1000);
     }
   };
 

@@ -33,6 +33,7 @@ function Dashboard() {
   const [workspace, setWorkspace] = useState(null); // Primary workspace
   const [sharedWorkspaces, setSharedWorkspaces] = useState([]); // Shared workspaces
   const [selectedWorkspace, setSelectedWorkspace] = useState(null); // Currently selected workspace
+  const [ownWorkspace, setownWokspace] = useState("");
   const [Forms, setForms] = useState("");
   const [loading, setLoading] = useState(true);
   const [selFolderid, setselFolderid] = useState("0");
@@ -116,6 +117,7 @@ function Dashboard() {
         setWorkspace(data.ownedWorkspace);
         setSharedWorkspaces(data.sharedWorkspaces);
         setSelectedWorkspace(data.ownedWorkspace?.id);
+        setownWokspace(data.ownedWorkspace?.id);
         if (data?.code === "0") {
           toast.error(data?.message, {
             duration: 1000,
@@ -407,7 +409,7 @@ function Dashboard() {
         <Share
           Mode={Mode}
           setsharepopup={setsharepopup}
-          selectedWorkspace={selectedWorkspace}
+          ownWorkspace={ownWorkspace}
         />
       )}
       {delFolderpopup && (

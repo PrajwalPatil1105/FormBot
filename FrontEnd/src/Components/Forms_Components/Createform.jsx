@@ -73,8 +73,6 @@ function Createform() {
       });
       const data = await response.json();
       if (data?.code === "1") {
-        console.log(data?.fields?.fields);
-
         setfields(data?.fields?.fields);
         toast.success("You can add/edit fields now");
       } else {

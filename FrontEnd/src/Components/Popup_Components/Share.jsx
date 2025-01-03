@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import toast, { Toaster } from "react-hot-toast";
 
-function Share({ Mode, setsharepopup, selectedWorkspace }) {
+function Share({ Mode, setsharepopup, ownWorkspace }) {
   const [sharedEmail, setsharedEmail] = useState("");
   const [accesslevel, setaccesslevel] = useState("edit");
   const [err, seterr] = useState("");
@@ -27,7 +27,7 @@ function Share({ Mode, setsharepopup, selectedWorkspace }) {
           },
           body: JSON.stringify({
             sharedEmail,
-            workspaceId: selectedWorkspace,
+            workspaceId: ownWorkspace,
             accesslevel,
           }),
           credentials: "include",
@@ -51,8 +51,7 @@ function Share({ Mode, setsharepopup, selectedWorkspace }) {
 
   async function GenerateLink() {
     try {
-      const shareLink = `https://form-bot-kappa.vercel.app/join/${selectedWorkspace}/${accesslevel}`;
-      // const shareLink = `http://localhost:5173/join/${selectedWorkspace}/${accesslevel}`;
+      const shareLink = `https://form-bot-kappa.vercel.app/join/${ownWorkspace}/${accesslevel}`;
       await navigator.clipboard.writeText(shareLink);
       toast.success("Share link copied to clipboard!");
     } catch (error) {

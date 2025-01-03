@@ -43,14 +43,13 @@ function JoinWorkspace() {
             toast.success(joinData?.message);
             setTimeout(() => {
               navigate("/dashboard");
-            }, 4000);
+            }, 2000);
           } else {
             toast.error(joinData?.message);
             navigate("/dashboard");
           }
         }
       } catch (error) {
-        console.log("Error joining workspace:");
         toast.error("Failed to join workspace");
       }
     };
