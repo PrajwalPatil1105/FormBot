@@ -51,7 +51,7 @@ function Share({ Mode, setsharepopup, selectedWorkspace }) {
 
   async function GenerateLink() {
     try {
-      const shareLink = `${BASE_URL}/Formbot/join/${selectedWorkspace}/${accesslevel}`;
+      const shareLink = `https://form-bot-kappa.vercel.app/join/${selectedWorkspace}/${accesslevel}`;
       // const shareLink = `http://localhost:5173/join/${selectedWorkspace}/${accesslevel}`;
       await navigator.clipboard.writeText(shareLink);
       toast.success("Share link copied to clipboard!");
