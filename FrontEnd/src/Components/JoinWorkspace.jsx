@@ -28,25 +28,7 @@ function JoinWorkspace() {
           navigate("/login");
           return;
         } else {
-          const joinResponse = await fetch(
-            `${BASE_URL}/Formbot/workspaces/join/${workspaceId}/${accesslevel}`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-            }
-          );
-          const joinData = await joinResponse.json();
-
-          if (joinResponse.ok) {
-            toast.success(joinData.message);
-            navigate("/dashboard");
-          } else {
-            toast.error(joinData.message);
-            navigate("/dashboard");
-          }
+          navigate("/dashboard");
         }
       } catch (error) {
         console.log("Error joining workspace:");
