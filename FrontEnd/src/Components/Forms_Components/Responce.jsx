@@ -112,7 +112,7 @@ function Response() {
             navigate("/thankyou", {
               state: { username: user?.name },
             });
-          }, 800);
+          }, 400);
         } else {
           toast.error(data?.message);
         }

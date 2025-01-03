@@ -58,7 +58,7 @@ function Details({ Mode, formid }) {
           const uniqueQuestions = Array.from(
             new Set(
               validResponses.flatMap((response) =>
-                response.answers.map((ans) => ans.question)
+                response.answers.map((ans) => ans.question || "Response")
               )
             )
           );

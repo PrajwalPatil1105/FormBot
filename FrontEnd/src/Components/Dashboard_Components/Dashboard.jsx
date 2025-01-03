@@ -361,9 +361,11 @@ function Dashboard() {
                 className={styles.files}
                 key={index}
                 onClick={() =>
-                  navigate("/createform", {
-                    state: { id: item?._id, formname: item?.formname },
-                  })
+                  accesslevel === "edit"
+                    ? navigate("/createform", {
+                        state: { id: item?._id, formname: item?.formname },
+                      })
+                    : toast.error("You don't have access to edit workspace")
                 }
               >
                 <p>{item?.formname}</p>
