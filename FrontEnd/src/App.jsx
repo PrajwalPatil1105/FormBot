@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./Components/Home";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import JoinWorkspace from "./Components/JoinWorkspace";
 import Dashboard from "./Components/Dashboard_Components/Dashboard";
 import Setting from "./Components/Dashboard_Components/Setting";
 import Createform from "./Components/Forms_Components/Createform";
@@ -24,6 +25,10 @@ function App() {
         <Route path="/response/:formid/*" element={<Responce />} />
         <Route path="/Details" element={<Details />} />
         <Route path="/thankyou" element={<Thankyou />} />
+        <Route
+          path="/join/:workspaceId/:accesslevel"
+          element={<JoinWorkspace />}
+        />
       </Routes>
     </BrowserRouter>
   );

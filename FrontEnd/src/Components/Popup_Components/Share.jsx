@@ -49,6 +49,17 @@ function Share({ Mode, setsharepopup, selectedWorkspace }) {
     }
   }, [serMsg]);
 
+  async function GenerateLink() {
+    try {
+      const shareLink = `${BASE_URL}/Formbot/join/${selectedWorkspace}/${accesslevel}`;
+      // const shareLink = `http://localhost:5173/join/${selectedWorkspace}/${accesslevel}`;
+      await navigator.clipboard.writeText(shareLink);
+      toast.success("Share link copied to clipboard!");
+    } catch (error) {
+      toast.error("Failed to copy link");
+    }
+  }
+
   return (
     <>
       <section
@@ -96,7 +107,7 @@ function Share({ Mode, setsharepopup, selectedWorkspace }) {
         <div className={styles.popupbtns}>
           <button onClick={sendlink}>Send Invite</button>
           <h1 className={styles.line}>Invite by link</h1>
-          <button>Copy link</button>
+          <button onClick={GenerateLink}>Copy link</button>
         </div>
       </section>
     </>

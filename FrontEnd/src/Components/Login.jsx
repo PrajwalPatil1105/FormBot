@@ -35,7 +35,6 @@ function Login() {
         credentials: "include",
       });
       const data = await responce.json();
-      console.log(data);
       setSerMsg(data);
     }
   }

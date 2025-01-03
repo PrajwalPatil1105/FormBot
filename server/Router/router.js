@@ -15,12 +15,14 @@ const VerifyUser = async (req, res, next) => {
   try {
     const isToken = req.cookies.usertoken;
     if (!isToken) {
+      console.log("Token not");
       return res
         .status(401)
         .json({ message: "You Are Not Authorized", code: "0" });
     }
     const decode = await jwt.verify(isToken, process.env.JWT_KEY);
     req.isUser = decode;
+    console.log("Decoded Token:", decode);
     next();
   } catch (error) {
     res.status(400).json({ message: "error", code: "0" });
@@ -207,8 +209,6 @@ router.delete("/folders/:id", async (req, res) => {
 
 router.post("/workspaces/share", VerifyUser, async (req, res) => {
   const { sharedEmail, workspaceId, accesslevel } = req.body;
-  console.log(req.body);
-
   try {
     if (sharedEmail === req.isUser.email) {
       return res.status(400).json({
@@ -529,6 +529,17 @@ router.put("/increment-start/:formId", async (req, res) => {
     res.status(200).json({ message: "Start count incremented successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error incrementing start count", error });
+  }
+});
+
+router.get("/check-auth", VerifyUser, (req, res) => {
+  try {
+    return res.status(200).json({
+      authenticated: true,
+      code: "1",
+    });
+  } catch (error) {
+    return res.status(401).json({ authenticated: false });
   }
 });
 

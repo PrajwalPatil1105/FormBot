@@ -92,7 +92,6 @@ function Dashboard() {
         setserMsg(data);
         setForms(data?.defaultForms);
       } catch (error) {
-        console.error("Error fetching workspaces:", error);
       } finally {
         setLoading(false);
       }
