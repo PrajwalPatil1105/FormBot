@@ -7,7 +7,7 @@ function JoinWorkspace() {
   const { workspaceId, accesslevel } = useParams();
   const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_APP_BASE_URL;
-  const currentPath = window.location.href;
+  const currentPath = window.location.pathname;
 
   useEffect(() => {
     const checkAuthAndJoin = async () => {
